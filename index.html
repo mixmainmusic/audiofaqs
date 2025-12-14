@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Audio FAQs</title>
+  <style>
+    :root{
+      --bg: #f5f6f7;
+      --panel: #ffffff;
+      --header: #0b0b0d;
+      --text: #1b1b1f;
+      --muted: #5b5b66;
+      --radius: 16px;
+      --shadow: 0 10px 24px rgba(0,0,0,.10);
+      --border: rgba(0,0,0,.10);
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 48px 16px;
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    h1{
+      margin: 0 0 18px;
+      font-size: 34px;
+      letter-spacing: -0.02em;
+    }
+    p.lead{
+      margin: 0 0 28px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .accordion{
+      display: grid;
+      gap: 22px;
+    }
+
+    details.faq{
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: var(--panel);
+    }
+
+    /* Q (barra negra) */
+    details.faq > summary{
+      list-style: none;
+      cursor: pointer;
+      padding: 22px 22px;
+      background: var(--header);
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    /* Q: quita el triangulito default */
+    details.faq > summary::-webkit-details-marker{ display:none; }
+
+    /* Flecha */
+    details.faq > summary::after{
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-right: 2px solid rgba(255,255,255,.9);
+      border-bottom: 2px solid rgba(255,255,255,.9);
+      transform: rotate(45deg);
+      transition: transform .18s ease;
+      flex: 0 0 auto;
+      margin-left: 6px;
+    }
+
+    /* Cuando está abierto, rota la flecha */
+    details.faq[open] > summary::after{
+      transform: rotate(-135deg);
+    }
+
+    /* A (contenido) */
+    .answer{
+      padding: 22px 22px 24px;
+      border: 1px solid var(--border);
+      border-top: none;
+      line-height: 1.65;
+      color: var(--text);
+    }
+    .answer strong{
+      font-weight: 800;
+    }
+    .answer .muted{
+      color: var(--muted);
+    }
+    .answer p{ margin: 0 0 14px; }
+    .answer p:last-child{ margin-bottom: 0; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>Audio FAQs</h1>
+    <p class="lead">Preguntas frecuentes sobre mi proceso de mezcla y master.</p>
+
+    <div class="accordion" id="accordion">
+      <details class="faq" open>
+        <summary>How does your process work, and how many revisions are included?</summary>
+        <div class="answer">
+          <p><strong>HOW:</strong> We start with a quick chat to align on what you need. Then I send a first mix that meets modern standards. After that, we do small adjustments based on your feedback until it matches your taste.</p>
+          <p><strong>TIMES:</strong> I don’t rush one-day deliveries, so it usually takes around <span class="muted">3 to 4 days</span>. My focus is a clean mix that translates everywhere and sounds modern.</p>
+          <p><strong>REVISIONS:</strong> I'm flexible on this, but in general clients only need <span class="muted">3–4 revisions max</span>. Sending one consolidated feedback message with time-stamps is important.</p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>Do you offer services beyond mixing and mastering?</summary>
+        <div class="answer">
+          <p>Sí. Puedo ayudarte con edición (limpieza de voces, comping), afinación sutil, preparación de stems, y entrega para plataformas (instrumental, a capella, clean, etc.).</p>
+        </div>
+      </details>
+
+      <details class="faq">
+        <summary>Do you work with AI music, and why do you use analog gear?</summary>
+        <div class="answer">
+          <p>Puedo mezclar proyectos que incluyan elementos generados con IA si el cliente tiene los derechos/permiso de uso. Uso hardware analógico cuando aporta color, pegada y profundidad; y digital cuando es más preciso y rápido. Lo importante es el resultado final.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <script>
+    // Acordeón "clásico": solo 1 abierto a la vez
+    const acc = document.getElementById('accordion');
+    acc.addEventListener('toggle', (e) => {
+      if (!e.target.open) return;
+      for (const d of acc.querySelectorAll('details.faq')) {
+        if (d !== e.target) d.removeAttribute('open');
+      }
+    }, true);
+  </script>
+</body>
+</html>
